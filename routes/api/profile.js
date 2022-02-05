@@ -102,4 +102,38 @@ router.post('/', [auth, [
 
     });
 
+// @route       GET api/profile
+// @desc        Récupération de tous les profils
+// @access      Public
+router.get('/', async (req, res) => {
+    try {
+        const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+        res.json(profiles);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Erreur serveur');
+    }
+});
+
+// @route       GET api/profile/user/:user_id
+// @desc        Récupération d'un profil par ID
+// @access      Public
+router.get('/user/:user_id', async (req, res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar']);
+
+        if (!profile) return res.status(400).json({ msg: "Aucun profil n'a été pour cet utilisateur.." });
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        // On vérifie le type d'erreur. S'il s'agit d'un id correct mais inexistant alors 'Aucun profil n'a été pour cet utilisateur..'
+        if (err.kind == 'ObjectID') {
+            if (!profile) return res.status(400).json({ msg: "Aucun profil n'a été pour cet utilisateur.." });
+        }
+        // S'il s'agit d'un id incorrect (e.g :mauvais nombre de caractères) 'Erreur serveur'
+        res.status(500).send('Erreur serveur');
+    }
+});
+
 module.exports = router;
