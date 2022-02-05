@@ -136,4 +136,24 @@ router.get('/user/:user_id', async (req, res) => {
     }
 });
 
+// @route       DELETE api/profile
+// @desc        Suppression d'un profil, de l'utilisateur et de ses posts
+// @access      Public
+router.delete('/', auth, async (req, res) => {
+    try {
+        // @TODOP - Supprimer les posts de l'utilisateur
+
+        // Suppression du profil
+        await Profile.findOneAndRemove({ user: req.user.id });
+
+        // Suppression de l'utilisateur
+        await User.findOneAndRemove({ _id: req.user.id });
+
+        res.json({ msg: 'Utilisateur supprimé' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Erreur serveur');
+    }
+});
+
 module.exports = router;
