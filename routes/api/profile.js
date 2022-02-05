@@ -149,11 +149,65 @@ router.delete('/', auth, async (req, res) => {
         // Suppression de l'utilisateur
         await User.findOneAndRemove({ _id: req.user.id });
 
-        res.json({ msg: 'Utilisateur supprimé' });
+        res.json({ msg: 'Utilisateur supprimé ' });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Erreur serveur');
     }
+});
+
+// @route       PUT api/profile/experience
+// @desc        Ajout des expériences au profil
+// @access      Private
+router.put('/experience', [auth, [
+    check('title', "Le titre doit être renseigné")
+        .not()
+        .isEmpty(),
+    check('company', "L'entreprise doit être renseignée")
+        .not()
+        .isEmpty(),
+    check('from', "La date d'embauche doit être renseignée")
+        .not()
+        .isEmpty(),
+]], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    // Récupération de tous ces champs depuis le corps de la requête
+    const {
+        title,
+        company,
+        location,
+        from,
+        to,
+        current,
+        description
+    } = req.body;
+
+    const newExp = {
+        title,
+        company,
+        location,
+        from,
+        to,
+        current,
+        description
+    };
+
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        profile.experience.unshift(newExp);
+        await profile.save();
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Erreur serveur');
+    }
+
 });
 
 module.exports = router;
