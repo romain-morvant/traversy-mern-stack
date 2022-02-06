@@ -210,7 +210,7 @@ router.put('/experience', [auth, [
 
 });
 
-// @route       DELETE api/profile/experience/exp_id
+// @route       DELETE api/profile/experience/:exp_id
 // @desc        Suppression des expériences du profil
 // @access      Private
 router.delete('/experience/:exp_id', auth, async (req, res) => {
@@ -223,6 +223,89 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
 
         // Suppression de l'éxpérience en question
         profile.experience.splice(removeIndex, 1);
+
+        // Sauvegarde du profil
+        await profile.save();
+
+        // Réponse
+        res.json(profile);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Erreur serveur ');
+    }
+});
+
+// @route       PUT api/profile/education
+// @desc        Ajout de la partie éducation au profil
+// @access      Private
+router.put('/education', [auth, [
+    check('school', "L'école doit être renseignée")
+        .not()
+        .isEmpty(),
+    check('degree', "Le niveau doit être renseigné")
+        .not()
+        .isEmpty(),
+    check('fieldofstudy', "Le domaine d'études doit être renseigné")
+        .not()
+        .isEmpty(),
+    check('from', "La date de début doit être renseignée")
+        .not()
+        .isEmpty(),
+]], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    // Récupération de tous ces champs depuis le corps de la requête
+    const {
+        school,
+        degree,
+        fieldofstudy,
+        from,
+        to,
+        current,
+        description
+    } = req.body;
+
+    const newEdu = {
+        school,
+        degree,
+        fieldofstudy,
+        from,
+        to,
+        current,
+        description
+    };
+
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        profile.education.unshift(newEdu);
+        await profile.save();
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Erreur serveur');
+    }
+
+});
+
+// @route       DELETE api/profile/education/:edu_id
+// @desc        Suppression de parties de l'éducation du profil
+// @access      Private
+router.delete('/education/:edu_id', auth, async (req, res) => {
+    try {
+        // Récupération du profil de l'utilisateur
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        // Récupération de l'index de l'éxpérience à supprimer
+        const removeIndex = profile.education.map(item => item.id).indexOf(req.params.edu_id);
+
+        // Suppression de l'éxpérience en question
+        profile.education.splice(removeIndex, 1);
 
         // Sauvegarde du profil
         await profile.save();
