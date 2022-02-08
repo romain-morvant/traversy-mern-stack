@@ -14,71 +14,77 @@ export function Register() {
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
       console.log('Les mots de passe ne sont pas identiques ..');
     } else {
-      console.log(formData);
+      console.log('BRAVO !');
     }
   };
 
   return (
     <Fragment>
-      <h1 className='large text-primary'>Sign Up</h1>
-      <p className='lead'>
-        <i className='fas fa-user'></i> Create Your Account
-      </p>
-      <form className='form' onSubmit={e => onSubmit(e)}>
-        <div className='form-group'>
+      <div className='container'>
+        <h1 className='large text-primary'>Inscription</h1>
+        <p className='lead'>
+          <i className='fas fa-user'></i> Créez Votre Compte
+        </p>
+        <form className='form' onSubmit={e => onSubmit(e)}>
+          <div className='form-group'>
+            <input
+              type='text'
+              placeholder='Nom'
+              name='name'
+              value={name}
+              onChange={e => onChange(e)}
+              required
+            />
+          </div>
+          <div className='form-group'>
+            <input
+              type='email'
+              placeholder='Adresse email'
+              name='email'
+              value={email}
+              onChange={e => onChange(e)}
+              required
+            />
+            <small className='form-text'>
+              Ce site utilise les Gravatar, donc si vous voulez l'activer,
+              utilisez un email gravatar !
+            </small>
+          </div>
+          <div className='form-group'>
+            <input
+              type='password'
+              placeholder='Mot de passe'
+              name='password'
+              value={password}
+              onChange={e => onChange(e)}
+              minLength='6'
+            />
+          </div>
+          <div className='form-group'>
+            <input
+              type='password'
+              placeholder='Confirmez le mot de passe'
+              name='password2'
+              value={password2}
+              onChange={e => onChange(e)}
+              minLength='6'
+            />
+          </div>
           <input
-            type='text'
-            placeholder='Name'
-            name='name'
-            value={name}
-            onChange={e => onChange(e)}
-            required
+            type='submit'
+            className='btn btn-primary'
+            value='Inscription'
           />
-        </div>
-        <div className='form-group'>
-          <input
-            type='email'
-            placeholder='Email Address'
-            name='email'
-            value={email}
-            onChange={e => onChange(e)}
-            required
-          />
-          <small className='form-text'>
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
-          </small>
-        </div>
-        <div className='form-group'>
-          <input
-            type='password'
-            placeholder='Password'
-            name='password'
-            value={password}
-            onChange={e => onChange(e)}
-            minLength='6'
-          />
-        </div>
-        <div className='form-group'>
-          <input
-            type='password'
-            placeholder='Confirm Password'
-            name='password2'
-            value={password2}
-            onChange={e => onChange(e)}
-            minLength='6'
-          />
-        </div>
-        <input type='submit' className='btn btn-primary' value='Register' />
-      </form>
-      <p className='my-1'>
-        Already have an account? <Link to='/login'>Sign In</Link>
-      </p>
+        </form>
+        <p className='my-1'>
+          Vous avez déjà un compte ? <Link to='/login'>Connectez vous</Link>
+        </p>
+      </div>
     </Fragment>
   );
 }
