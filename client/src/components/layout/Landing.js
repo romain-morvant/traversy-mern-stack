@@ -2,19 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export function Landing() {
-    return (<section className="landing">
-        <div className="dark-overlay">
-            <div className="landing-inner">
-                <h1 className="x-large">Developer Connector</h1>
-                <p className="lead">
-                    Create a developer profile/portfolio, share posts and get help from
-                    other developers
-                </p>
-                <div className="buttons">
-                    <Link to="/register" className="btn btn-primary">Sign Up</Link>
-                    <Link to="/login" className="btn btn-light">Login</Link>
-                </div>
-            </div>
+  return (
+    <section className='landing'>
+      <div className='dark-overlay'>
+        <div className='landing-inner'>
+          <h1 className='x-large'>DevConnector</h1>
+          <p className='lead'>
+            Créez un profil / portfolio, partagez des posts et faîtes vous aider
+            par les autres membres !
+          </p>
+          <div className='buttons'>
+            <Link to='/register' className='btn btn-primary'>
+              Inscription
+            </Link>
+            <Link to='/login' className='btn btn-light'>
+              Connexion
+            </Link>
+          </div>
         </div>
-    </section>);
-};
+      </div>
+    </section>
+  );
+}
