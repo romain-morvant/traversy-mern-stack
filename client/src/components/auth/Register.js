@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
 
 export const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState({
@@ -84,6 +84,10 @@ export const Register = ({ setAlert }) => {
       </p>
     </section>
   );
+};
+
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
 };
 
 export default connect(null, { setAlert })(Register);
