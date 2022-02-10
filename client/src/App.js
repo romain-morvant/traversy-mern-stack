@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Navbar } from './components/layout/Navbar';
 import { Landing } from './components/layout/Landing';
@@ -14,12 +14,14 @@ export default function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Landing />} />
-          <Route path='register' element={<Register />} />
-          <Route path='login' element={<Login />} />
-        </Routes>
+        <Fragment>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Landing />} />
+            <Route path='register' element={<Register />} />
+            <Route path='login' element={<Login />} />
+          </Routes>
+        </Fragment>
       </Router>
     </Provider>
   );
