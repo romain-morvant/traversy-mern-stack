@@ -8,8 +8,8 @@ export function Landing() {
         <div className='landing-inner'>
           <h1 className='x-large'>DevConnector</h1>
           <p className='lead'>
-            Créez un profil / portfolio, partagez des posts et recevez de l'aide
-            d'autres développeurs !
+            Créez un profil / portfolio, partagez des posts et faîtes vous aider
+            par les autres membres !
           </p>
           <div className='buttons'>
             <Link to='/register' className='btn btn-primary'>
