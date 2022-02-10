@@ -1,6 +1,7 @@
-import React, { Fragment, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 
 export const Register = ({ setAlert }) => {
@@ -26,7 +27,7 @@ export const Register = ({ setAlert }) => {
   };
 
   return (
-    <div className='container'>
+    <section className='container'>
       <h1 className='large text-primary'>Inscription</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Créez Votre Compte
@@ -81,7 +82,7 @@ export const Register = ({ setAlert }) => {
       <p className='my-1'>
         Vous avez déjà un compte ? <Link to='/login'>Connectez vous</Link>
       </p>
-    </div>
+    </section>
   );
 };
 
