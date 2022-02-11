@@ -7,12 +7,12 @@ const initialState = {
   user: null,
 };
 
-export default function authReducer(state = initialState, action) {
+function authReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
     case REGISTER_SUCCESS:
-      localStorage.setItem('token', payload.token);
+      // localStorage.setItem('token', payload.token);
       return {
         ...state,
         ...payload,
@@ -32,3 +32,5 @@ export default function authReducer(state = initialState, action) {
       return state;
   }
 }
+
+export default authReducer;
