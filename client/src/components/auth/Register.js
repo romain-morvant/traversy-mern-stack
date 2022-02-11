@@ -5,7 +5,7 @@ import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-export const Register = ({ setAlert }) => {
+export const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -40,7 +40,7 @@ export const Register = ({ setAlert }) => {
             placeholder='Nom'
             name='name'
             value={name}
-            onChange={onChange}
+            onChange={e => onChange(e)}
             // required
           />
         </div>
@@ -50,7 +50,7 @@ export const Register = ({ setAlert }) => {
             placeholder='Adresse email'
             name='email'
             value={email}
-            onChange={onChange}
+            onChange={e => onChange(e)}
             // required
           />
           <small className='form-text'>
@@ -64,7 +64,7 @@ export const Register = ({ setAlert }) => {
             placeholder='Mot de passe'
             name='password'
             value={password}
-            onChange={onChange}
+            onChange={e => onChange(e)}
             // minLength='6'
           />
         </div>
@@ -74,7 +74,7 @@ export const Register = ({ setAlert }) => {
             placeholder='Confirmez le mot de passe'
             name='password2'
             value={password2}
-            onChange={onChange}
+            onChange={e => onChange(e)}
             // minLength='6'
           />
         </div>
@@ -92,4 +92,4 @@ Register.propTypes = {
   register: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
