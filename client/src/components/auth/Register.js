@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
 export const Register = ({ setAlert }) => {
@@ -20,9 +21,9 @@ export const Register = ({ setAlert }) => {
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      setAlert('Les mots de passe ne sont pas identiques ..', 'danger');
+      setAlert('Passwords do not match', 'danger');
     } else {
-      console.log('BRAVO !');
+      register({ name, email, password });
     }
   };
 
@@ -39,8 +40,8 @@ export const Register = ({ setAlert }) => {
             placeholder='Nom'
             name='name'
             value={name}
-            onChange={e => onChange(e)}
-            required
+            onChange={onChange}
+            // required
           />
         </div>
         <div className='form-group'>
@@ -49,8 +50,8 @@ export const Register = ({ setAlert }) => {
             placeholder='Adresse email'
             name='email'
             value={email}
-            onChange={e => onChange(e)}
-            required
+            onChange={onChange}
+            // required
           />
           <small className='form-text'>
             Ce site utilise les Gravatar, donc si vous voulez l'activer,
@@ -63,8 +64,8 @@ export const Register = ({ setAlert }) => {
             placeholder='Mot de passe'
             name='password'
             value={password}
-            onChange={e => onChange(e)}
-            minLength='6'
+            onChange={onChange}
+            // minLength='6'
           />
         </div>
         <div className='form-group'>
@@ -73,8 +74,8 @@ export const Register = ({ setAlert }) => {
             placeholder='Confirmez le mot de passe'
             name='password2'
             value={password2}
-            onChange={e => onChange(e)}
-            minLength='6'
+            onChange={onChange}
+            // minLength='6'
           />
         </div>
         <input type='submit' className='btn btn-primary' value='Inscription' />
@@ -88,6 +89,7 @@ export const Register = ({ setAlert }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 export default connect(null, { setAlert })(Register);
