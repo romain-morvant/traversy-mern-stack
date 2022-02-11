@@ -1,4 +1,3 @@
-import { init } from 'express/lib/application';
 import { REGISTER_SUCCESS, REGISTER_FAIL } from '../actions/types';
 
 const initialState = {
