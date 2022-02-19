@@ -43,7 +43,7 @@ const CreateProfile = props => {
       <div className='container'>
         <h1 className='large text-primary'>Créez votre profil</h1>
         <p className='lead'>
-          <i className='fas fa-user'></i> Ajoutez quelques informations à votre
+          <i className='fas fa-user'/> Ajoutez quelques informations à votre
           profil afin qu'il se démarque !
         </p>
         <small>* = ce champ est requis</small>
@@ -157,7 +157,7 @@ const CreateProfile = props => {
           {displaySocialInputs && (
             <Fragment>
               <div className='form-group social-input'>
-                <i className='fab fa-twitter fa-2x'></i>
+                <i className='fab fa-twitter fa-2x'/>
                 <input
                   type='text'
                   placeholder='Compte Twitter'
@@ -168,7 +168,7 @@ const CreateProfile = props => {
               </div>
 
               <div className='form-group social-input'>
-                <i className='fab fa-facebook fa-2x'></i>
+                <i className='fab fa-facebook fa-2x'/>
                 <input
                   type='text'
                   placeholder='Compte Facebook'
@@ -179,7 +179,7 @@ const CreateProfile = props => {
               </div>
 
               <div className='form-group social-input'>
-                <i className='fab fa-youtube fa-2x'></i>
+                <i className='fab fa-youtube fa-2x'/>
                 <input
                   type='text'
                   placeholder='Compte YouTube'
@@ -190,7 +190,7 @@ const CreateProfile = props => {
               </div>
 
               <div className='form-group social-input'>
-                <i className='fab fa-linkedin fa-2x'></i>
+                <i className='fab fa-linkedin fa-2x'/>
                 <input
                   type='text'
                   placeholder='Compte Linkedin'
@@ -201,7 +201,7 @@ const CreateProfile = props => {
               </div>
 
               <div className='form-group social-input'>
-                <i className='fab fa-instagram fa-2x'></i>
+                <i className='fab fa-instagram fa-2x'/>
                 <input
                   type='text'
                   placeholder='Compte Instagram'
@@ -214,7 +214,7 @@ const CreateProfile = props => {
           )}
 
           <input type='submit' className='btn btn-primary my-1' />
-          <a className='btn btn-light my-1' href='dashboard.html'>
+          <a className='btn btn-light my-1' href='/dashboard'>
             Retour
           </a>
         </form>
